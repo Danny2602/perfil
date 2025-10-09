@@ -45,6 +45,7 @@ function CardInit() {
                     <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600" onClick={handleScrollToSkills}/>
                     <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600" onClick={() => window.open(HV, "_blank")}/>
                 </div>
+                
                 <div className="row-span-2 items-center justify-center flex flex-col">
                     <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
