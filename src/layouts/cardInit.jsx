@@ -4,7 +4,7 @@ import { FaFilePdf,FaList } from "react-icons/fa";
 import { motion } from "motion/react";
 import img1 from '@/assets/images/img1.png';
 import useScrollAndMobile from "@/hooks/useScrollAndMovile";
-
+import HV from '@/assets/docs/HV.pdf';
 function CardInit() {
     const { isScrolled, isMobile } = useScrollAndMobile();
 
@@ -34,7 +34,7 @@ function CardInit() {
                 </div>
                 <div className="flex justify-center space-x-5">
                     <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600"  onClick={handleScrollToSkills}/>
-                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600" />
+                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600" onClick={() => window.open(HV, "_blank")} />
                     
                 </div>
                 <br></br>
@@ -43,7 +43,7 @@ function CardInit() {
             <>
                 <div className="flex justify-center space-x-5">
                     <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600" onClick={handleScrollToSkills}/>
-                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600"/>
+                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600" onClick={() => window.open(HV, "_blank")}/>
                 </div>
                 <div className="row-span-2 items-center justify-center flex flex-col">
                     <motion.div

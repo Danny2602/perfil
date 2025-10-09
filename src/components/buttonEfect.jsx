@@ -5,7 +5,7 @@ const Icon = ({ icon,className }) => { return (
     <div className={`${className}`}>{icon}</div>
 ); };
 
-const ButtonEfect = ({ text,icon, className, onClick }) => {
+const ButtonEfect = ({ text,icon, className, onClick, href }) => {
   return (
     <motion.button
       className={`bg-white text-black flex rounded-2xl cursor-pointer text-center content-center items-center justify-center space-x-3 p-3 w-40 shadow-md ${className}`}
@@ -13,6 +13,7 @@ const ButtonEfect = ({ text,icon, className, onClick }) => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
       onClick={onClick}
+      href={href}
       whileHover={{
         rotateZ: -3, // inclinación hacia la izquierda
         y: -4, // se levanta un poco
