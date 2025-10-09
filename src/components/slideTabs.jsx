@@ -21,7 +21,7 @@ const SlideTabs = ({redes}) => {
       className="relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
     >
     {redes.map((red,index)=>(
-        <a key={index} href={red.url}>
+        <a key={index} href={red.url} target="_blank" rel="noopener noreferrer">
             <Tab key={index} setPosition={setPosition}> {red.icon}</Tab>
         </a>
     ))}

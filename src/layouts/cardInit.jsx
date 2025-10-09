@@ -7,6 +7,13 @@ import useScrollAndMobile from "@/hooks/useScrollAndMovile";
 
 function CardInit() {
     const { isScrolled, isMobile } = useScrollAndMobile();
+
+    const handleScrollToSkills = () => {
+    const section = document.getElementById("skills");
+    if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+    }
+};
     return (
         <>
         {isMobile? (
@@ -26,8 +33,8 @@ function CardInit() {
                     </motion.div>
                 </div>
                 <div className="flex justify-center space-x-5">
-                    <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600"/>
-                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600"/>
+                    <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600"  onClick={handleScrollToSkills}/>
+                    <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600" />
                     
                 </div>
                 <br></br>
@@ -35,7 +42,7 @@ function CardInit() {
         ):(
             <>
                 <div className="flex justify-center space-x-5">
-                    <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600"/>
+                    <ButtonEfect text="Skills" icon={<FaList />} className="text-blue-600" onClick={handleScrollToSkills}/>
                     <ButtonEfect text="CV" icon={<FaFilePdf />} className="text-red-600"/>
                 </div>
                 <div className="row-span-2 items-center justify-center flex flex-col">
