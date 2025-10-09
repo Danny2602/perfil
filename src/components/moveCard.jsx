@@ -6,17 +6,12 @@ import {
   useSpring,
 } from "framer-motion";
 import { FiMousePointer } from "react-icons/fi";
-const MoveCard = ({image}) => {
-  return (
-      <TiltCard image={image} />
-    
-  );
-};
+
 
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
-const TiltCard = ({image}) => {
+const MoveCard = ({image}) => {
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -59,7 +54,7 @@ const TiltCard = ({image}) => {
         transformStyle: "preserve-3d",
         transform,
       }}
-      className="relative h-96 w-72 rounded-xl bg-gradient-to-br from-indigo-300 to-violet-300"
+      className="relative h-96 w-72 rounded-xl bg-gradient-to-br"
     >
       <div
         style={{
@@ -72,7 +67,7 @@ const TiltCard = ({image}) => {
         className="absolute inset-4 grid place-content-center rounded-xl bg-white shadow-lg"
         
       >
-        <FiMousePointer
+        {/* <FiMousePointer
           style={{
             transform: "translateZ(75px)",
           }}
@@ -85,7 +80,7 @@ const TiltCard = ({image}) => {
           className="text-center text-2xl font-bold"
         >
           HOVER ME
-        </p>
+        </p> */}
       </div>
     </motion.div>
   );
