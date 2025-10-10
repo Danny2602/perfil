@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { ModalUP } from "@/components/modalUp";
 import {
   motion,
   useMotionTemplate,
@@ -94,28 +95,31 @@ const MoveCard = ({image}) => {
 
 
 
-const RevealBento = ({ icons }) => {
+const RevealBento = ({ icons, setOpen, setSelectedDescription }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" }); // margin para activar antes de estar completamente visible
+  const isInView = useInView(ref, { once: true, margin: "-150px" }); // margin para activar antes de estar completamente visible
 
   return (
-    <div ref={ref} className="bg-zinc-900 items-center justify-center flex text-zinc-50">
+    <div ref={ref} className=" px-4 py-12 text-zinc-50">
       <motion.div
         initial="initial"
         animate={isInView ? "animate" : "initial"}
         transition={{
           staggerChildren: 0.05,
         }}
-        className="grid max-w-4xl w-50 grid-rows-6 gap-4 p-3"
+        className="mx-auto grid max-w-1xl grid-flow-dense grid-cols-6 gap-4"
+         
       >
-        <SocialsBlock icons={icons} />
+        <SocialsBlock icons={icons} setOpen={setOpen} setSelectedDescription={setSelectedDescription} />
       </motion.div>
     </div>
   );
 };
-const Block = ({ className, ...rest }) => {
+const Block = ({ className,onClick, ...rest }) => {
   return (
     <motion.div
+      onClick={onClick}
+      style={{ cursor: "pointer" }}
       variants={{
         initial: {
           scale: 0.5,
@@ -135,9 +139,10 @@ const Block = ({ className, ...rest }) => {
         damping: 50,
       }}
       className={twMerge(
-        "col-span-4 rounded-lg border border-zinc-700 bg-zinc-800 p-9",
+        "col-span-4  rounded-lg border border-zinc-700 bg-zinc-800 p-9",
         className
-      )}
+      )
+      }
       {...rest}
     />
   );
@@ -145,7 +150,7 @@ const Block = ({ className, ...rest }) => {
 
 
 
-const SocialsBlock = ({ icons }) => (
+const SocialsBlock = ({ icons, setOpen, setSelectedDescription }) => (
     <>
         {icons.map((icon, index) => {
             const alternar = index % 2 === 0;
@@ -157,14 +162,21 @@ const SocialsBlock = ({ icons }) => (
                         rotate: alternar ? "2.5deg" : "-2.5deg",
                         scale: 1.1,
                     }}
-                    className={`col-span-6 md:col-span-3 ${icon.color}`}
+                    className={`col-span-3 md:col-span-3 ${icon.color}`}
+                    key={index}
+                    onClick={() => {
+                        setOpen(true);
+                        setSelectedDescription(icon.description);
+                    }}
                 >
                     <a
+                        
                         key={index}
-                        href="#"
-                        className="grid h-full place-content-center text-3xl text-white"
+                        
+                        className="flex flex-col items-center justify-center h-full text-3xl text-white text-center"
                     >
-                        {icon.icon}
+                        <div>{icon.icon}</div> 
+                        <div>{icon.Text && <span className="text-sm ml-2">{icon.Text}</span>}</div>
                     </a>
                 </Block>
                 
@@ -174,5 +186,22 @@ const SocialsBlock = ({ icons }) => (
         )}
     </>
 );
+
+
+
+// const ButtonVariants = () => {
+//      const [open, setOpen] = useState(false);
+//     return (
+//         <>
+//             <button
+//             onClick={() => setOpen(true)}
+//             className="rounded bg-indigo-500 px-4 py-2 text-white transition-colors hover:bg-indigo-600"
+//             >
+//             Open drawer
+//             </button>
+//             <ModalUP open={open} setOpen={setOpen} children={<>{texts()}</>} />
+//         </>
+//     )
+// };
 
 export { MoveCard, RevealBento };
