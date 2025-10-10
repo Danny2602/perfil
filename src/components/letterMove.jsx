@@ -1,13 +1,13 @@
-// src/components/LetterMove.jsx
 import React, { useEffect, useState } from "react";
-import "@/assets/styles/textStyle.css"; // tu estilo existente
+import "@/assets/styles/textStyle.css";
 
-function LetterMove({ letter, fontSize }) {
+function LetterMove({ letter, fontSize, color1, color2 }) {
   const [isMobile, setIsMobile] = useState(false);
+  // CAMBIO: Se usa React.useId() para generar un id único para el gradiente en cada instancia
+  const gradientId = React.useId(); // genera un id único
 
-  // Detecta tamaño de pantalla como hacía useMediaQuery
   useEffect(() => {
-    const checkScreen = () => setIsMobile(window.innerWidth < 640); // sm breakpoint en Tailwind
+    const checkScreen = () => setIsMobile(window.innerWidth < 640);
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
@@ -17,13 +17,14 @@ function LetterMove({ letter, fontSize }) {
     <div className="letra flex justify-center items-center">
       <svg viewBox="0 0 100 20" className="letra-svg">
         <defs>
-          <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="5%" stopColor="black" />
-            <stop offset="95%" stopColor="black" />
+          {/* CAMBIO: Se usa el id único generado para linearGradient */}
+          <linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1">
+            <stop offset="5%" stopColor={color1} />
+            <stop offset="95%" stopColor={color2} />
           </linearGradient>
-
+          {/* CAMBIO: Se usa el id único generado para el pattern */}
           <pattern
-            id="wave"
+            id={`wave-${gradientId}`}
             x="0"
             y="0"
             width="120"
@@ -34,7 +35,7 @@ function LetterMove({ letter, fontSize }) {
               id="wavePath"
               d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
               mask="url(#mask)"
-              fill="url(#gradient)"
+              fill={`url(#${gradientId})`}
             >
               <animateTransform
                 attributeName="transform"
@@ -48,28 +49,24 @@ function LetterMove({ letter, fontSize }) {
             </path>
           </pattern>
         </defs>
-
-        {/* Texto con animación */}
         <text
           textAnchor="middle"
           x="50"
           y="15"
           className="letra-text"
           style={{ fontSize: isMobile ? fontSize * 0.7 : fontSize }}
-          fill="url(#wave)"
+          fill={`url(#wave-${gradientId})`}
           fillOpacity="0.7"
         >
           {letter}
         </text>
-
-        {/* Texto base */}
         <text
           textAnchor="middle"
           x="50"
           y="15"
           className="letra-text"
           style={{ fontSize: isMobile ? fontSize * 0.7 : fontSize }}
-          fill="url(#gradient)"
+          fill={`url(#${gradientId})`}
           fillOpacity="0.4"
         >
           {letter}
